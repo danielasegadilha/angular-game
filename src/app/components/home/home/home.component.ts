@@ -11,5 +11,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  buttonLabel: String =  'Let`s Play'
+  buttonLabel: String =  'Let`s Play';
+  buttonBackground: String = '#C44395';
+  buttonColor: String = '#FEFCD6'
 }
