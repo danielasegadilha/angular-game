@@ -3,26 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CharadeComponent } from './components/charade/charade.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ButtonComponent } from './components/button/button.component';
-import { BrandComponent } from './components/brand/brand.component';
-import { HowToPlayComponent } from './pages/how-to-play/how-to-play.component';
-import { ResultComponent } from './pages/result/result.component';
+import { CharadeComponent } from './components/game/charade/charade.component';
+import { HomeModule } from './components/home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharadeComponent,
-    HomeComponent,
-    ButtonComponent,
-    BrandComponent,
-    HowToPlayComponent,
-    ResultComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
