@@ -11,5 +11,5 @@ export class CharadeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  buttonLabel: String = 'Next'
 }

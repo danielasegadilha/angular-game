@@ -11,5 +11,5 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  buttonLabel: String = 'Play again'
 }
