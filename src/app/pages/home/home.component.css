@@ -1,0 +1,9 @@
+.home_brand-container {
+    height: 65vh;
+    margin: 3rem 0;
+}
+
+.home_button-container {
+    display: flex;
+    justify-content: center;
+}

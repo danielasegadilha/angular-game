@@ -1,0 +1,10 @@
+.brand_container {
+    display: flex;
+    justify-content: center;
+    height: 65vh;
+}
+
+.brand_img > img {
+    object-fit: contain;
+    width: fit-content;
+}
