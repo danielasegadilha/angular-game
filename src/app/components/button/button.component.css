@@ -8,4 +8,15 @@ button {
     border: none;
     padding: 15px 100px;
     border-radius: 100px;
+    margin: 0 auto;
 }
+
+button:hover {
+    background-color: #A02875;
+    box-shadow: 1px 1px 10px 0px rgba(255,242,225,0.29);
+}
+
+ button:active {
+    position: relative;
+    top: 2px;
+ }
