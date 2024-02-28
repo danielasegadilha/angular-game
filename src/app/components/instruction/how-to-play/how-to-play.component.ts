@@ -11,5 +11,5 @@ export class HowToPlayComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  buttonLabel: String = "Next"
 }
