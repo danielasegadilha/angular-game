@@ -3,18 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CharadeComponent } from './components/game/charade/charade.component';
 import { HomeModule } from './components/home/home.module';
+import { InstructionModule } from './components/instruction/instruction.module';
+import { GameModule } from './components/game/game.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CharadeComponent,
   ],
   imports: [
     BrowserModule,
+    HomeModule,
+    InstructionModule,
+    GameModule,
     AppRoutingModule,
-    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

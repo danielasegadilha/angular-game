@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
+import { HowToPlayComponent } from './how-to-play/how-to-play.component';
+import { InstructionRoutingModule } from './instruction-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [HowToPlayComponent],
   imports: [
-    CommonModule
-  ]
+    SharedModule, 
+    InstructionRoutingModule]
 })
+
 export class InstructionModule { }

@@ -11,9 +11,7 @@ import { NavComponent } from './nav/nav.component';
     BrandComponent,
     NavComponent,
   ],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [
     ButtonComponent,
     BrandComponent,
