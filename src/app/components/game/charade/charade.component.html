@@ -2,10 +2,6 @@
     <app-nav></app-nav>
 </div>
 <div class="charade_container">
-    <div class="charade_question-container">
-        <app-question></app-question>
-    </div>
-    <div class="charade_button-container">
-        <app-button [routerLink]="['/game/result']" [label]="buttonLabel"></app-button>
-    </div>
+    <app-question></app-question>
+    <app-button [routerLink]="['/game/result']" [label]="buttonLabel"></app-button>
 </div>

@@ -12,3 +12,7 @@ body {
     overflow: hidden;
     font-family: 'Chewy';
 }
+
+p {
+    font-size: 24px;
+}

@@ -1,4 +1,9 @@
-.charade_container {
+.charade_container{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 48px;
+    ;
 }
