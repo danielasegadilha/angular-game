@@ -1,14 +1,16 @@
 .question-question_container {
     text-align: center;
-    padding: 24px;
+    padding: 32px;
     background: linear-gradient(to bottom,  #faaa82 0%,#c44395 69%);
     width: 50vw;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
 
-h1 {
+h2 {
     color: #FFF9F9;
+    margin-bottom: 32px;
+    font-weight: 100;
 }
 
 .question-question_container p {
