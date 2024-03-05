@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-question',
@@ -12,4 +12,6 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() number: String = '';
+  @Input() charade: String = '';
 }

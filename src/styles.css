@@ -6,13 +6,13 @@
 }
 
 body {
-    background: linear-gradient(155deg, #7b317c 13%,#502773 22%,#2c2166 34%,#2c2166 40%,#191f59 60%,#132152 100%);
+    background: linear-gradient(159deg, #7b317c 13%,#502773 25%,#2c2166 34%,#2c2166 40%,#191f59 60%,#132152 100%);
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     font-family: 'Chewy';
 }
 
-p {
+p, label, input {
     font-size: 24px;
 }

@@ -12,4 +12,6 @@ export class CharadeComponent implements OnInit {
   ngOnInit(): void {
   }
   buttonLabel: String = 'Next'
+  charadeNumber: String = '1'
+  charadeText: String = 'The more you take, the more you leave behind.';
 }

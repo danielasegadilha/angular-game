@@ -1,8 +1,13 @@
 <div class="question_container">
     <div class="question-question_container">
-        <h2>Question 1</h2>
-        <p>The more you take, the more you leave behind.</p>
+        <h2>Question {{ number }}</h2>
+        <p>{{ charade }}</p>
         <p>What am I?</p> 
     </div>
-    
+    <form method="post" id="answerForm">
+        <fieldset>
+            <label for="answer" id="answerLabel">Answer: 
+            <input id="answer" type="text" required></label>
+        </fieldset>
+    </form>
 </div>

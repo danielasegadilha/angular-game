@@ -2,6 +2,6 @@
     <app-nav></app-nav>
 </div>
 <div class="charade_container">
-    <app-question></app-question>
+    <app-question [number]="charadeNumber"  [charade]="charadeText"></app-question>
     <app-button [routerLink]="['/game/result']" [label]="buttonLabel"></app-button>
 </div>
