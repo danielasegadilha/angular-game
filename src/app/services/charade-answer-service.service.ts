@@ -8,14 +8,15 @@ import { environment } from 'src/environments/environment';
 })
 export class CharadeAnswerService {
   private apiUrl: String = ''
+  private charadeAnswer: String = ''
   
   constructor(private http: HttpClient) {
     this.apiUrl = environment.charadeAPI
    }
 
-   getCharade(charadeQuestion: String):Observable<String> {
-    this.http.get(`${this.apiUrl}`)
-    console.log(charadeQuestion)
-   }
+  //  getAnswer():Observable<String> {
+  //   this.charadeAnswer = this.http.get(`${this.apiUrl}`)
+  //   return this.charadeAnswer
+  //  }
 
 }
