@@ -5,10 +5,11 @@ import { CharadeComponent } from './charade/charade.component';
 import { GameRoutingModule } from './game-routing.module';
 import { FeedbackComponent } from './result/feedback/feedback.component';
 import { QuestionComponent } from './charade/question/question.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [CharadeComponent, ResultComponent, FeedbackComponent, QuestionComponent],
-  imports: [SharedModule, GameRoutingModule]
+  imports: [SharedModule, GameRoutingModule, HttpClientModule]
 })
 
 export class GameModule { }
