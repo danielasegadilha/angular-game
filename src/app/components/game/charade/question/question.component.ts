@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CharadeAnswerService } from 'src/app/services/charade-answer-service.service';
+import { CharadeService } from 'src/app/services/charade-service.service';
 
 @Component({
   selector: 'app-question',
@@ -7,7 +9,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class QuestionComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private questionService: CharadeService,
+    private answerService: CharadeAnswerService      
+  ) { }
 
   ngOnInit(): void {
   }
