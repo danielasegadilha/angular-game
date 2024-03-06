@@ -26,14 +26,19 @@ h2 {
     border-bottom-right-radius: 20px;
 }
 
+#answerForm:hover {
+    background-color: #fffbc9;
+}
+
 fieldset {
     padding: 16px 54px;
 }
 
 fieldset, input {
     border: none;
-    cursor: pointer;
+    cursor: text;
 }
+
 
 label, input {
     color: #c44395;
@@ -43,7 +48,7 @@ input {
     margin-left: 24px;
     background-color: transparent;
     min-height: 2.5em;
-    width: 50%;
+    width: 80%;
 }
 
 input:focus {

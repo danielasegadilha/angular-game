@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CharadeComponent } from './charade/charade.component';
 import { ResultComponent } from './result/result.component';
 
 const gameRoutes: Routes = [
-  {path: 'game/charade', component: CharadeComponent},
+  {path: 'game/charade/:id', component: CharadeComponent},
   {path: 'game/result', component: ResultComponent}
 ];
 
