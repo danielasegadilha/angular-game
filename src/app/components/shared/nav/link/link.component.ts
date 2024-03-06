@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-link',
@@ -12,4 +12,6 @@ export class LinkComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() link: String = '';
+  @Input() icon: String = '';
 }

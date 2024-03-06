@@ -16,3 +16,8 @@ body {
 p, label, input {
     font-size: 24px;
 }
+
+.material-symbols-outlined {
+    font-size: 32px;
+    display: inline;
+}
