@@ -22,13 +22,17 @@ h2 {
 
 #answerForm {
     background-color: #FEFCD6;
-    padding: 16px 54px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
+fieldset {
+    padding: 16px 54px;
+}
+
 fieldset, input {
     border: none;
+    cursor: pointer;
 }
 
 label, input {

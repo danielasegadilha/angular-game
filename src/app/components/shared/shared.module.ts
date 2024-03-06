@@ -4,6 +4,7 @@ import { BrandComponent } from './brand/brand.component';
 import { ButtonComponent } from './button/button.component';
 import { NavComponent } from './nav/nav.component';
 import { LinkComponent } from './nav/link/link.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { LinkComponent } from './nav/link/link.component';
     NavComponent,
     LinkComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   exports: [
     ButtonComponent,
     BrandComponent,
