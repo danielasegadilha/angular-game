@@ -1,81 +1,111 @@
--- Tabela typeCharade
-CREATE TABLE typeCharade (
-    typeCharadeID INT PRIMARY KEY,
-    type VARCHAR(50) NOT NULL
-);
 
--- Tabela charade
-CREATE TABLE charade (
-    charadeID INT PRIMARY KEY,
-    typeCharadeID INT NOT NULL,
-    difficulty VARCHAR(10) NOT NULL CHECK (difficulty IN ('easy', 'medium', 'hard')),
-    origin VARCHAR(50),
-    description VARCHAR(255) NOT NULL,
-    answer VARCHAR(50) NOT NULL,
-    FOREIGN KEY (typeCharadeID) REFERENCES typeCharade(typeCharadeID)
-);
-
--- Tabela multipleChoice
-CREATE TABLE multipleChoice (
-    multipleChoiceID INT PRIMARY KEY,
-    charadeID INT NOT NULL,
-    optionText VARCHAR(50) NOT NULL,
-    isCorrect BOOLEAN NOT NULL,
-    FOREIGN KEY (charadeID) REFERENCES charade(charadeID)
-    -- Aqui removemos a coluna typeCharadeID e a restrição CHECK, recomendando outra forma de validação
-);
-
--- Tabela tag (sem mudanças)
 CREATE TABLE tag (
-    tagID INT PRIMARY KEY,
-    tagName VARCHAR(50) NOT NULL CHECK(tagName IN ('movie', 'funny', 'logic', 'science', 'classic'))
+    tagName VARCHAR(50) PRIMARY KEY CHECK(tagName IN ('movie', 'funny', 'logic', 'science', 'classic'))
 );
 
--- Tabela charadeTag (sem mudanças)
+
 CREATE TABLE charadeTag (
     charadeTagID INT PRIMARY KEY,
     charadeID INT NOT NULL,
-    tagID INT NOT NULL,
+    tagID VARCHAR(50) NOT NULL,
     FOREIGN KEY (charadeID) REFERENCES charade(charadeID),
-    FOREIGN KEY (tagID) REFERENCES tag(tagID)
+    FOREIGN KEY (tagID) REFERENCES tag(tagName)
 );
 
 
-------------------------
 
--- Tabela charade ajustada
 CREATE TABLE charade (
     charadeID INT PRIMARY KEY,
-    charadeType VARCHAR(1) NOT NULL CHECK (charadeType IN ('m', 's')), -- 'm' para múltipla escolha, 's' para discursiva
+    charadeType VARCHAR(1) NOT NULL CHECK (charadeType IN ('m', 's')), 
     difficulty VARCHAR(10) NOT NULL CHECK (difficulty IN ('easy', 'medium', 'hard')),
     origin VARCHAR(50),
     description VARCHAR(255) NOT NULL,
     answer VARCHAR(50) NOT NULL
 );
 
--- Tabela multipleChoice ajustada
+
 CREATE TABLE multipleChoice (
     multipleChoiceID INT PRIMARY KEY,
     charadeID INT NOT NULL,
     optionText VARCHAR(50) NOT NULL,
-    isCorrect BOOLEAN NOT NULL,
-    FOREIGN KEY (charadeID) REFERENCES charade(charadeID) -- Mantém a referência ao charadeID
-    -- Removemos o typeCharadeID e a restrição CHECK, controlaremos pelo TRIGGER
+    isCorrect BIT NOT NULL,
+    FOREIGN KEY (charadeID) REFERENCES charade(charadeID) 
+
 );
 
------------
-
-DELIMITER $$
-
 CREATE TRIGGER BeforeInsertMultipleChoice
-BEFORE INSERT ON multipleChoice
-FOR EACH ROW
+ON multipleChoice
+INSTEAD OF INSERT
+AS
 BEGIN
-    DECLARE v_charadeType CHAR(1);
-    SELECT charadeType INTO v_charadeType FROM charade WHERE charadeID = NEW.charadeID;
-    IF v_charadeType <> 'm' THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Inserção inválida: apenas charadas do tipo múltipla escolha podem ter opções de múltipla escolha.';
-    END IF;
-END$$
 
-DELIMITER ;
+    DECLARE @v_charadeType CHAR(1);
+
+
+    DECLARE @charadeID INT;
+    DECLARE inserted_cursor CURSOR FOR
+        SELECT charadeID FROM inserted;
+    OPEN inserted_cursor;
+
+    FETCH NEXT FROM inserted_cursor INTO @charadeID;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        
+        SELECT @v_charadeType = charadeType FROM charade WHERE charadeID = @charadeID;
+
+       
+        IF @v_charadeType <> 'm'
+        BEGIN
+            THROW 50000, 'Invalid entry: only multiple choice riddles can have multiple choice options', 1;
+        END
+
+        FETCH NEXT FROM inserted_cursor INTO @charadeID;
+    END
+
+    CLOSE inserted_cursor;
+    DEALLOCATE inserted_cursor;
+
+    INSERT INTO multipleChoice (multipleChoiceID, charadeID, optionText, isCorrect)
+        SELECT multipleChoiceID, charadeID, optionText, isCorrect FROM inserted;
+END
+
+CREATE TRIGGER CheckUniqueCorrectOption
+ON multipleChoice
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @charadeID INT;
+
+    SELECT @charadeID = charadeID
+    FROM inserted
+    WHERE isCorrect = 1;
+
+    IF ((SELECT COUNT(*) FROM inserted) > 1 OR
+    EXISTS (SELECT 1 FROM multipleChoice WHERE charadeID = @charadeID AND isCorrect = 1))
+    BEGIN
+        RAISERROR ('Only one correct option is allowed per charade.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END;
+END;
+
+INSERT INTO tag (tagName) VALUES
+    ('movie'),
+    ('funny'),
+    ('logic'),
+    ('science'),
+    ('classic');
+
+INSERT INTO charade (charadeID, charadeType , difficulty, origin, description, answer) VALUES
+    (1, 'm', 'medium', NULL, 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?', 'An Echo');
+
+INSERT INTO charade (charadeID, charadeType , difficulty, origin, description, answer) VALUES
+    (2, 's', 'medium', NULL, 'What is as light as a feather, yet the strongest person can''t hold it for more than a few minutes?', 'Breath');
+
+INSERT INTO multipleChoice (multipleChoiceID, charadeID, optionText, isCorrect) VALUES
+    (1, 1, 'Breath', 1),
+    (2, 1, 'A bubble', 0),
+    (3, 1, 'A thought', 1)
+    (4, 1, 'A cloud', 0);
+
